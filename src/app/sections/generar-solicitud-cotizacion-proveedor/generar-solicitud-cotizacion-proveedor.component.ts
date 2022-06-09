@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
 import { Orden, OrdenDetalle } from 'src/app/models/orden';
@@ -27,10 +27,11 @@ export class GenerarSolicitudCotizacionProveedorComponent implements OnInit {
   tipoParametro:string='ruc';
   valorBusqueda:string='';
   model: NgbDateStruct;
+  limiteRango: NgbDateStruct;
   user:Trabajador;
   modalidadPago:string="Contado";
 
-  fechaActual:string;
+  fechaActual:Date;
 
   readonly prefijo="SCP";
   readonly conceptoOrden="Reposición de Materiales";
@@ -38,13 +39,15 @@ export class GenerarSolicitudCotizacionProveedorComponent implements OnInit {
   readonly estadoFinalAceptadoOrden="Aceptado";
   readonly estadoFinalAnuladoOrden="Anulado";
 
-  constructor(private api: ApiService) { 
+  constructor(private api: ApiService,private calendar: NgbCalendar) { 
+    this.model = this.calendar.getToday();
+    this.limiteRango = this.calendar.getToday();
   }
   
   ngOnInit(): void {
     this.cargarControles();
     this.user = this.api.obtenerUsuario();
-    this.fechaActual = '2022-06-08';
+    this.fechaActual = new Date(); 
   }
 
   cargarControles() {

@@ -151,7 +151,7 @@
                                             <label for="inputFecha" class="col-sm-4 col-form-label">Fecha:</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" id="inputFecha"
-                                                    placeholder="Fecha" [value]="fechaActual" readonly>
+                                                    placeholder="Fecha" value="{{fechaActual.getFullYear()+'-'+((fechaActual.getMonth()+1) | number:'2.') +'-'+ (fechaActual.getDate() | number:'2.') }}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                        <input [value]="fechaActual" class="form-control" placeholder="yyyy-mm-dd"
+                                                        <input [minDate]="{year: limiteRango.year, month: limiteRango.month, day: limiteRango.day}" [(ngModel)]="model" class="form-control" placeholder="yyyy-mm-dd"
                                                             name="dp" ngbDatepicker #d="ngbDatepicker">
                                                         <div class="input-group-append calendar" (click)="d.toggle()">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
