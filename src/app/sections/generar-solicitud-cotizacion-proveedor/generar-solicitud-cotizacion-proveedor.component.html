@@ -1,0 +1,242 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Generar Solicitud de Cotización para Proveedores</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Ordenes de Reposición
+                        </h3>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nro Orden</th>
+                                        <th>Fecha Solicitada</th>
+                                        <th>Items</th>
+                                        <th>Anular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let orden of ordenes">
+                                        <td><input type="radio" name="rbgOR" (change)="obtenerDetallesOrden(orden.idOrden)"></td>
+                                        <td>{{orden.idOrden}}</td>
+                                        <td>{{orden.fechaGenerada | date:'shortDate'}}</td>
+                                        <td>{{orden.nroItems}}</td>
+                                        <td><a class="link" (click)="actualizarOrden(estadoFinalAnuladoOrden,orden.idOrden)">Anular</a></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <label for="detalleOrden" class="ml-3">Detalles de la Orden seleccionada</label>
+                            <table id="detalleOrden" class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo Material</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Presentación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let detalle of detallesOrden">
+                                        <td>{{detalle.codigoMaterial}}</td>
+                                        <td>{{detalle.material}}</td>
+                                        <td>{{detalle.cantidadRequerida}}</td>
+                                        <td>{{detalle.presentacion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card  card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Catálogo proveedores
+                        </h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <div style="display:flex; justify-content:center; align-items:center;" class="p-4">
+                                <label for="">Ingrese:</label>
+                                <div class="group-rb ml-3 ">
+                                    <div class="rbi">
+                                        <input (change)="tipoParametro='ruc'" class="mr-1" type="radio" name="rgParam" id="rbruc" checked>
+                                        <label for="rbruc">RUC</label>
+                                    </div>
+                                    <div class="rbi">
+                                        <input (change)="tipoParametro='razonsocial'" class="mr-1" type="radio" name="rgParam" id="rbnombre">
+                                        <label for="rbnombre">Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="ml-4" style="display: flex; flex-direction:column; position:relative">
+                                    <input (change)="ingresaValorBusqueda()" [(ngModel)]="valorBusqueda" type="text" class="form-control " style="width: 300px;">
+                                    <p style="position: absolute; top:40px;left:0;color:rgb(226, 29, 29);line-height: 0.9;font-weight: bold;font-size: 0.8rem;" class="text-error" *ngIf="textError != ''" >{{textError}}</p>
+                                </div>
+                                <button (click)="buscarProveedor()" class="btn btn-primary ml-4 "><i class="fas fa-search"></i> Buscar</button>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>RUC</th>
+                                        <th>Nombre Proveedor</th>
+                                        <th>Teléfono</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let proveedor of proveedores">
+                                        <td>{{proveedor.ruc}}</td>
+                                        <td>{{proveedor.razonSocial}}</td>
+                                        <td>{{proveedor.telefono}}</td>
+                                        <td><input class="control-input" type="checkbox"
+                                            (change)="proveedor.seleccionado = !proveedor.seleccionado"  [checked]="proveedor.seleccionado"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            <div style="display: flex; justify-content:end;" class="mt-3">
+                                <button [disabled]="proveedores.length==0" (click)="agregarProveedoresSeleccionados()" class="btn btn-primary ml-2 mr-4 mb-3">
+                                    <i class="fas fa-plus"></i>
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card  card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Solicitud de Cotización
+                        </h3>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="nroFicha" class="col-sm-4 col-form-label">Nro Solicitud:</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="nroFicha"
+                                                    placeholder="Nro Ficha" [value]="solicitudCotizacion.idSolicitudCotizacion" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputFecha" class="col-sm-4 col-form-label">Fecha:</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="inputFecha"
+                                                    placeholder="Fecha" [value]="fechaActual" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="solicitante" class="col-sm-4 col-form-label">Solicitado
+                                                por:</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="solicitante"
+                                                    placeholder="Solicitante" [value]="user.nombres +' '+ user.apellidos" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="fechaLimite" class="col-sm-4 col-form-label">Fecha
+                                                Limite:</label>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                                        <input [value]="fechaActual" class="form-control" placeholder="yyyy-mm-dd"
+                                                            name="dp" ngbDatepicker #d="ngbDatepicker">
+                                                        <div class="input-group-append calendar" (click)="d.toggle()">
+                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="modalidadPago" class="col-sm-4 col-form-label">Modalidad de
+                                                Pago:</label>
+                                            <div class="col-sm-6">
+                                                <select [(ngModel)]="modalidadPago" class="form-control" id="modalidadPago">
+                                                    <option value="Contado">Contado</option>
+                                                    <option value="Crédito">Crédito</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="pl-3 pb-3">Proveedores Seleccionados:</label>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>RUC</th>
+                                        <th>Nombre Proveedor</th>
+                                        <th>Teléfono</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let proveedor of proveedoresSeleccionados;let i=index" >
+                                        <td>{{proveedor.ruc}}</td>
+                                        <td>{{proveedor.razonSocial}}</td>
+                                        <td>{{proveedor.telefono}}</td>
+                                        <td><button (click)="proveedoresSeleccionados.splice(i,1)" class="btn">
+                                            <i class="fas fa-trash"></i>
+                                        </button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 mb-4" style="display: flex; justify-content:space-between;" >
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button [disabled]="proveedoresSeleccionados.length==0 || idOrdenSeleccionado=='' " (click)="registrar()" class="btn btn-success">
+                <i class="fas fa-check-circle"></i>
+                &nbsp; Generar Solicitud de Cotización
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+.nav-item {
+    cursor: pointer;
+}
+.row{
+    display: flex;
+}
+.row--right {
+    justify-content: end;
+    align-items: center;
+}
+.row--start {
+    justify-content: end;
+    align-items: flex-start;
+}
+.row--between {
+    justify-content: space-between;
+    align-items: center;
+}
+.row--center {
+    justify-content: center;
+    align-items: center;
+}
+
+.link{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.group-rb{
+    display: flex;
+    flex-direction: column;
+}
+.rbi{
+    align-items: center;
+}
+.tipo-param{
+    display: flex;
+    align-items:flex-start;
+}
+select {
+    background-image: url(../src/assets/img/down.svg)!important;
+    background-repeat: no-repeat!important;
+    /* background-position: right center!important; */
+    background-position-x: calc(100% - 10px) !important;
+    background-position-y: 10px !important;
+    background-size: 12px ;
+}
+.form-group{
+    align-items: center;
+}
+.form-group>p{
+    margin-bottom: 0px;
+}

@@ -1,0 +1,180 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Generar Orden de Compra</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Orden de Compra
+                        </h3>
+                        
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="nroOrdenCompra" class="col-sm-4 col-form-label">Nro Orden:</label>
+                                            <p class="col-sm-6">
+                                                {{ordenCompra.idOrdenCompra}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="fechaSolicitando" class="col-sm-4 col-form-label">Fecha Solicitada:</label>
+                                            <p class="col-sm-6">
+                                                {{fechaSolicitando.toLocaleDateString()}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="nro Solicitud Cotizacion" class="col-sm-4 col-form-label">Nro Solicitud:</label>
+                                            <div class="col-sm-6 ">
+                                                <div style="display: flex;justify-content:space-between;">
+                                                    <input type="text" [(ngModel)]="idSolicitudCotizacion" style="width: 50%;" class="form-control" id="nro Solicitud Cotizacion"
+                                                    placeholder="SCP001" >
+                                                    <button (click)="buscarSolicitudCotizacion()" class="btn btn-primary" >
+                                                        <i class="fas fa-search"></i>
+                                                        Buscar
+                                                    </button>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="fechaSolicitando" class="col-sm-4 col-form-label">Costo de envío (S/.):</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="fechaSolicitando"
+                                                    placeholder="Fecha Solicitada" (change)="calcular()" [(ngModel)]="ordenCompra.costoEnvio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="proveedor" class="col-sm-4 col-form-label">Proveedor:</label>
+                                            <div class="col-sm-6">
+                                                <select [(ngModel)]="ruc" (change)="traerDireccion()" class="form-control" id="proveedor">
+                                                    <option *ngIf="proveedores.length==0" value="0">Selecciona un proveedor</option>
+                                                    <option *ngFor="let p of proveedores" [value]="p.ruc">{{p.razonSocial}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="proveedor" class="col-sm-4 col-form-label">Dirección Proveedor:</label>
+                                            
+                                            <p class="col-sm-6" > 
+                                                {{direccionProveedor}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">Proforma:</label>
+                                            <input class="col-sm-8" value="sada" type="file" name="" id="proforma">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="pl-3">Detalle de la orden de compra:</label>
+                            <table class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>Cod</th>
+                                        <th>Descripcion</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unidad c/IGV (S/.)</th>
+                                        <th>Importe (S/.)</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let od of ordenDetalle" [class.table-danger]="od.removido">
+                                        <td>{{od.codigoMaterial}}</td>
+                                        <td>{{od.material}}</td>
+                                        <td>
+                                            <input style="text-align: end;" type="text" name="" id="" (change)="calcular()"  [(ngModel)]="od.cantidadRequerida" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input style="text-align: end;" type="text" name="" id="" (change)="calcular()" [(ngModel)]="od.precioUnidad" class="form-control">
+                                        </td>
+                                        <td style="text-align: end;">
+                                            {{(od.cantidadRequerida || 0) * (od.precioUnidad || 0) | number:'2.2-2'}}
+                                        </td>
+                                        <td>
+                                            <a class="link" *ngIf="od.removido"(click)="agregarQuitar(od)" >Agregar</a>
+                                            <a class="link" *ngIf="!od.removido"(click)="agregarQuitar(od)" >Quitar</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="display: flex;justify-content:end;" class="p-3">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td></td> 
+                                            <td style="width:100px;"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th style="text-align: end;">Subtotal (S/.):</th>
+                                            <td style="text-align: end;">{{subtotal | number:'2.2-2'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: end;">Costo envío (S/.):</th>
+                                            <td style="text-align: end;">{{ordenCompra.costoEnvio | number:'2.2-2'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: end;">IGV 18% (S/.):</th>
+                                            <td style="text-align: end;">{{igv | number:'2.2-2'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: end;">Importe Total (S/.):</th>
+                                            <td style="text-align: end;">{{importeTotal | number:'2.2-2'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-2 mb-4" style="display:flex;justify-content: space-between;">
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button class="btn btn-success">
+                <i class="fas fa-check-circle"></i>
+                &nbsp; Generar Orden de Compra
+            </button>
+        </div>
+    </div>
+</section>

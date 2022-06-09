@@ -1,0 +1,58 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4" >
+
+    <a class="brand-link " style="text-align: center;">
+        <!-- <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8"> -->
+        <span  class="brand-text font-weight-light"><b>El Deportivo</b> Software</span>
+    </a>
+
+    <div class="sidebar">
+
+        <div class="user-panel mt-3 pb-3 d-flex">
+            <div class="image">
+                <img src="assets/img/profile.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a class="d-block">{{user.nombres || 'nombre'}} {{user.apellidos || 'apellido'}}</a>
+            </div>
+        </div>
+
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-item">
+                    <a class="nav-link ">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Abastecimiento
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li *ngIf="user.idRol==1" class="nav-item">
+                            <a routerLink="orden-reposicion" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar orden de reposicion</p>
+                            </a>
+                        </li>
+                        <li *ngIf="user.idRol==2" class="nav-item">
+                            <a routerLink="solicitud-cotizacion-proveedor" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar solicitud de cotizacion para proveedor</p>
+                            </a>
+                        </li>
+                        <li *ngIf="user.idRol==2" class="nav-item">
+                            <a routerLink="orden-compra" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar orden de compra</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </nav>
+
+    </div>
+
+</aside>
