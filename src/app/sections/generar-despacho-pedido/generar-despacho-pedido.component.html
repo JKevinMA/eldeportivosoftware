@@ -1,0 +1,202 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Generar Despacho de Pedido</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Guias de Remisión de Pedido
+                        </h3>
+                    </div>
+                    <div class="card-body p-0 ">
+                        <div class="tab-content table-responsive">
+                            <div class="p-3" style="display: flex; justify-content:end;align-items: center;">
+                                <label for="distrito">Distrito:</label>
+                                <input style="width: 200px;" type="text" class="form-control ml-2" id="distrito"
+                                    placeholder="Tarma">
+                                <button class="btn btn-primary ml-2">
+                                    <i class="fas fa-search"></i>
+                                    &nbsp;&nbsp;Buscar
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Nro Guia</th>
+                                            <th>Nro Orden P.</th>
+                                            <th>Cliente</th>
+                                            <th>Direccion</th>
+                                            <th>Teléfono</th>
+                                            <th>F. Creación de Guía</th>
+                                            <th>F. Entrega</th>
+                                            <th>Transportista</th>
+                                            <th>Estado</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>GR005</td>
+                                            <td>OP050</td>
+                                            <td>Juan Gabriel Perez Martinez</td>
+                                            <td>Jirón Los Duraznos 720 Tarma</td>
+                                            <td>982 563 415</td>
+                                            <td>
+                                                15/05/22
+                                            </td>
+                                            <td>
+                                                15/05/22
+                                            </td>
+                                            <td>
+                                                Julio Huaynates
+                                            </td>
+                                            <td>
+                                                Emitido
+                                            </td>
+                                            <td>
+                                                <input type="checkbox">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-sm mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion Material</th>
+                                            <th>Talla</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Casaca Tela Poliester
+                                            </td>
+                                            <td>
+                                                M
+                                            </td>
+                                            <td>
+                                                50
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Buzo Tela Poliester
+                                            </td>
+                                            <td>
+                                                M
+                                            </td>
+                                            <td>
+                                                50
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="p-3" style="display: flex; justify-content:end;align-items: center;">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    &nbsp;&nbsp;Añadir
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Despacho
+                        </h3>
+                    </div>
+                    <div class="card-body p-0 ">
+                        <div class="tab-content ">
+                            <div class="p-3"
+                                style="display: flex; justify-content:start;align-items: center; flex-wrap: wrap; gap:16px">
+                                <div class="group-horizontal">
+                                    <label for="despacho">Despacho N°:</label>
+                                    <input readonly type="text" value="GR005" id="despacho" class="form-control ml-2"
+                                        style="width:200px;">
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="fechaSalida">Fecha Salida:</label>
+                                    <input readonly type="text" value="15/05/22" id="fechaSalida"
+                                        class="form-control ml-2" style="width:200px;">
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="origenDespacho">Origen despacho:</label>
+                                    <input readonly type="text" value="Jirón Paucartambo 741 - Tarma"
+                                        id="origenDespacho" class="form-control ml-2" style="width:200px;">
+                                </div>
+
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Nro Guia</th>
+                                            <th>Nro Orden P.</th>
+                                            <th>Cliente</th>
+                                            <th>Direccion</th>
+                                            <th>Teléfono</th>
+                                            <th>F. Entrega</th>
+                                            <th>Transportista</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>GR005</td>
+                                            <td>OP050</td>
+                                            <td>Juan Gabriel Perez Martinez</td>
+                                            <td>Jirón Los Duraznos 720 Tarma</td>
+                                            <td>982 563 415</td>
+                                            <td>
+                                                15/05/22
+                                            </td>
+                                            <td>
+                                                Julio Huaynates
+                                            </td>
+                                            <td>
+                                                <button class="btn">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 mb-4" style="display:flex;justify-content: space-between;">
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button class="btn btn-success">
+                <i class="fas fa-check-circle"></i>
+                &nbsp; Generar Despacho de Pedido
+            </button>
+        </div>
+    </div>
+</section>

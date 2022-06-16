@@ -20,7 +20,7 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="user.idRol==1 || user.idRol==2">
                     <a class="nav-link ">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
@@ -29,27 +29,56 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li *ngIf="user.idRol==1" class="nav-item">
+                        <li *ngIf="user.idRol==1" class="nav-item"> <!-- Encargado de almacen Id: 1 -->
                             <a routerLink="orden-reposicion" routerLinkActive="active" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Generar orden de reposicion</p>
                             </a>
                         </li>
-                        <li *ngIf="user.idRol==2" class="nav-item">
+                        <li *ngIf="user.idRol==2" class="nav-item"> <!-- Jefe de abastecimiento de almacen Id: 2 -->
                             <a routerLink="solicitud-cotizacion-proveedor" routerLinkActive="active" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Generar solicitud de cotizacion para proveedor</p>
                             </a>
                         </li>
-                        <li *ngIf="user.idRol==2" class="nav-item">
+                        <li *ngIf="user.idRol==2" class="nav-item"> <!-- Jefe de abastecimiento de almacen Id: 2 -->
                             <a routerLink="orden-compra" routerLinkActive="active" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Generar orden de compra</p>
                             </a>
                         </li>
+                        <li *ngIf="user.idRol==1" class="nav-item"> <!-- Encargado de almacen Id: 1 -->
+                            <a routerLink="almacenar-materiales" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Almacenar materiales - En desarrollo</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                
+                <li class="nav-item"  *ngIf="user.idRol==3">
+                    <a class="nav-link ">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>
+                            Entrega de pedidos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li *ngIf="user.idRol==3" class="nav-item"> <!-- Personal de entrega Id: 3 -->
+                            <a routerLink="generar-guia-remision" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar guia de remisión</p>
+                            </a>
+                        </li>
+                        <li *ngIf="user.idRol==3" class="nav-item"> <!-- Personal de entrega Id: 3 -->
+                            <a routerLink="generar-despacho-pedido" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar despacho de pedido - En desarrollo</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
             </ul>
         </nav>
 

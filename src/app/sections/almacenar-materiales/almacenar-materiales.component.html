@@ -1,0 +1,100 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Almacenar Materiales</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Orden de Compra
+                        </h3>
+                    </div>
+                    <div class="card-body p-0 ">
+                        <div class="tab-content">
+                            <div class="table-responsive">
+                                <table class="table table-sm" >
+                                    <thead>
+                                        <tr>
+                                            <th>Orden</th>
+                                            <th>Nombre</th>
+                                            <th>Desc. Material</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Presentacion</th>
+                                            <th>Estado</th>
+                                            <th></th>
+                                        </tr>  
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="3">OC002</td>
+                                            <td>Tela Poliester</td>
+                                            <td>Tela Poliester Color Marron</td>
+                                            <td>75</td>
+                                            <td>120.00</td>
+                                            <td>Rollos</td>
+                                            <td rowspan="3">Pendiente Almacen</td>
+                                            <td rowspan="3"><input type="checkbox"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tela Poliester</td>
+                                            <td>Tela Poliester Color Blanco</td>
+                                            <td>75</td>
+                                            <td>120.00</td>
+                                            <td>Rollos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tela Poliester</td>
+                                            <td>Tela Poliester Color Azul</td>
+                                            <td>75</td>
+                                            <td>120.00</td>
+                                            <td>Rollos</td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td rowspan="1">OC005</td>
+                                            <td>Tela Poliester</td>
+                                            <td>Tela Poliester Color Rojo</td>
+                                            <td>75</td>
+                                            <td>120.00</td>
+                                            <td>Rollos</td>
+                                            <td rowspan="1">Pendiente Almacen</td>
+                                            <td rowspan="1"><input type="checkbox"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="p-3" style="display: flex; justify-content:end;align-items: center;">
+                                <button class="btn btn-primary">
+                                    Entregar Material
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-generar-ficha-e-s-material></app-generar-ficha-e-s-material>
+        <div class="p-2 mb-4" style="display:flex;justify-content: space-between;">
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button class="btn btn-success">
+                Registrar E/S de Materiales
+            </button>
+        </div>
+    </div>
+</section>

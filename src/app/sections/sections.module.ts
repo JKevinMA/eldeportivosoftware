@@ -5,6 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GenerarSolicitudCotizacionProveedorComponent } from './generar-solicitud-cotizacion-proveedor/generar-solicitud-cotizacion-proveedor.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { GenerarOrdenCompraComponent } from './generar-orden-compra/generar-orden-compra.component';
+import { SolicitudMaterialesSuministroComponent } from './solicitud-materiales-suministro/solicitud-materiales-suministro.component';
+import { GenerarEntregaMaterialFabricacionComponent } from './generar-entrega-material-fabricacion/generar-entrega-material-fabricacion.component';
+import { GenerarGuiaRemisionComponent } from './generar-guia-remision/generar-guia-remision.component';
+import { ComponentsModule } from '../components/components.module';
+import { GenerarDespachoPedidoComponent } from './generar-despacho-pedido/generar-despacho-pedido.component';
+import { AlmacenarMaterialesComponent } from './almacenar-materiales/almacenar-materiales.component';
 
 
 
@@ -12,18 +18,28 @@ import { GenerarOrdenCompraComponent } from './generar-orden-compra/generar-orde
   declarations: [
     GenerarOrdenReposicionComponent,
     GenerarSolicitudCotizacionProveedorComponent,
-    GenerarOrdenCompraComponent
+    GenerarOrdenCompraComponent,
+    SolicitudMaterialesSuministroComponent,
+    GenerarEntregaMaterialFabricacionComponent,
+    GenerarGuiaRemisionComponent,
+    GenerarDespachoPedidoComponent,
+    AlmacenarMaterialesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    ComponentsModule
   ],
   exports:[
     GenerarOrdenReposicionComponent,
     GenerarSolicitudCotizacionProveedorComponent,
-    GenerarOrdenCompraComponent
+    GenerarOrdenCompraComponent,
+    SolicitudMaterialesSuministroComponent,
+    GenerarEntregaMaterialFabricacionComponent,
+    GenerarGuiaRemisionComponent,
+    GenerarDespachoPedidoComponent
   ]
 })
 export class SectionsModule { }

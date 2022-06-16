@@ -128,7 +128,7 @@ export class GenerarOrdenReposicionComponent implements OnInit {
         this.orden.detalles = [];
         
         this.materialesRequeridos.forEach(mr=>{
-          this.orden.detalles.push({idOrden:this.orden.idOrden,codigoMaterial:mr.codigoMaterial,cantidadRequerida:(mr.limite - mr.stock)});
+          this.orden.detalles.push({idOrden:this.orden.idOrden,codigoMaterial:mr.codigoMaterial,cantidadRequerida:(mr.limite - mr.stock),precioUnidad:0});
         });
         
         this.orden.nroItems = this.orden.detalles.length;

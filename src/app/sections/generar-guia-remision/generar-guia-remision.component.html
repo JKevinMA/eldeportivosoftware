@@ -1,0 +1,171 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Generar Guía de Remisión</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <app-busqueda-pedido [fecha]="fecha" [estado]="estadoOrdenesPedido" (seleccionaOrdenPedido)="agregaOrdenPedido($event)" ></app-busqueda-pedido>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Asignar Transportista Disponible
+                        </h3>
+                    </div>
+                    <div class="card-body p-0 ">
+                        <div class="tab-content ">
+                            <div class="p-3" style="display: flex; justify-content:start;align-items: center;">
+                                <label for="distrito" >Distrito:</label>
+                                <select name="" [(ngModel)]="idDistrito" id="distrito" class="form-control ml-2"style="width:200px;" >
+                                    <option *ngFor="let distrito of distritos" [value]="distrito.idDistrito">{{distrito.descripcion}}</option>
+                                </select>
+                                <button [disabled]="ordenPedido.idOrdenPedido==null" (click)="buscarTransportistas()" class="btn btn-primary ml-3">
+                                    <i class="fas fa-search"></i>
+                                    &nbsp;&nbsp;Buscar Transportista
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Cod Transportista</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Licencia</th>
+                                            <th>Placa</th>
+                                            <th>Vehículo</th>
+                                            <th>Modelo</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let transportista of transportistas">
+                                            <td>{{transportista.idTransportista}}</td>
+                                            <td>{{transportista.nombres}}</td>
+                                            <td>{{transportista.apellidos}}</td>
+                                            <td>{{transportista.licencia}}</td>
+                                            <td>{{transportista.placa}}</td>
+                                            <td>{{transportista.vehiculo}}</td>
+                                            <td>{{transportista.modelo}}</td>
+                                            <td><input (change)="transportista.seleccionado= !transportista.seleccionado" type="checkbox"></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="p-3" style="display: flex; justify-content:end;align-items: center;">
+                                <button [disabled]="ordenPedido.idOrdenPedido==null" (click)="agregarTransportista()" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    &nbsp;&nbsp;Añadir
+                                </button>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Guia de Remisión
+                        </h3>
+                    </div>
+                    <div class="card-body p-0 ">
+                        <div class="tab-content ">
+                            <div class="p-3" style="display: flex; justify-content:start;align-items: center; flex-wrap: wrap; gap:16px">
+                                <div class="group-horizontal">
+                                    <label for="nroguia">N° Guía:</label>
+                                    <input readonly type="text" [value]="guiaRemision.idGuiaRemision" id="nroguia" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="fechaEmision">Fecha Emisión:</label>
+                                    <input readonly type="text" [value]="fecha" id="fechaEmision" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="puntoSalida">Punto de Salida:</label>
+                                    <input readonly type="text" [value]="puntoSalida" id="puntoSalida" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="destino">Destino:</label>
+                                    <input readonly type="text" [value]="ordenPedido.direccion || '-'" id="destino" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="nroOrdenPedido">Nro Orden Pedido:</label>
+                                    <input readonly type="text" [value]="ordenPedido.idOrdenPedido || '-'" id="nroOrdenPedido" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="destinatario">Destinatario:</label>
+                                    <input readonly type="text" [value]="ordenPedido.nombres || '-'" id="destinatario" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input readonly type="text" [value]="ordenPedido.telefono || '-'" id="telefono" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                            </div>
+                            <label class="pl-3" style="font-size: 1.2rem; font-weight: 400;">Unidad de transporte y conductor</label>
+                            <div class="p-3" style="display: flex; justify-content:start;align-items: center; flex-wrap: wrap; gap:16px">
+                                <div class="group-horizontal">
+                                    <label for="transAsignado">Transportista Asignado:</label>
+                                    <input readonly type="text" [value]="transportista.nombres || '-'" id="transAsignado" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="placa">Placa:</label>
+                                    <input readonly type="text" [value]="transportista.placa || '-'" id="placa" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="vehiculo">Vehiculo:</label>
+                                    <input readonly type="text" [value]="transportista.vehiculo || '-'" id="vehiculo" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                                <div class="group-horizontal">
+                                    <label for="modelo">Modelo:</label>
+                                    <input readonly type="text" [value]="transportista.modelo || '-'" id="modelo" class="form-control ml-2" style="width:200px;" >
+                                </div>
+                            </div>
+                            <label class="pl-3" style="font-size: 1.2rem; font-weight: 400;">Descripcion</label>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Descripcion</th>
+                                            <th>Talla</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let detalle of ordenPedido.detalles;let i = index;">
+                                            <td>{{(i+1)}}</td>
+                                            <td>{{detalle.prenda}}</td>
+                                            <td>{{detalle.talla}}</td>
+                                            <td>{{detalle.cantidad}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 mb-4" style="display:flex;justify-content: space-between;">
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button (click)="registrar()" [disabled]="transportista.idTransportista==null" class="btn btn-success">
+                <i class="fas fa-check-circle"></i>
+                &nbsp; Generar Orden de Compra
+            </button>
+        </div>
+    </div>
+</section>

@@ -10,6 +10,10 @@ import { Orden, OrdenDetalle } from './models/orden';
 import { SolicitudCotizacion } from './models/solicitud-cotizacion';
 import { Proveedor } from './models/proveedor';
 import { OrdenCompra } from './models/orden-compra';
+import { OrdenPedido } from './models/orden-pedido';
+import { Transportista } from './models/transportista';
+import { Distrito } from './models/distrito';
+import { GuiaRemision } from './models/guia-remision';
 
 @Injectable({
   providedIn: 'root'
@@ -123,4 +127,20 @@ export class ApiService {
     return this.http.post<Result<number>>(`${this.BASE_URL}ordencompra`,ordenCompra);
   }
 
+  // GENERAR GUIA DE REMISION
+  obtenerOrdenesPedidos(fecha:string,estado:string){
+    return this.http.get<Result<OrdenPedido[]>>(`${this.BASE_URL}guiaremision/pedidos?fecha=${fecha}&estado=${estado}`);
+  }
+  obtenerTransportistas(idDistrito:number){
+    return this.http.get<Result<Transportista[]>>(`${this.BASE_URL}guiaremision/transportistas?idDistrito=${idDistrito}`);
+  }
+  obtenerDistritos(){
+    return this.http.get<Result<Distrito[]>>(`${this.BASE_URL}guiaremision/distritos`);
+  }
+  obtenerNuevoNroGuiaRemision(prefijo:string){
+    return this.http.get<Result<GuiaRemision>>(`${this.BASE_URL}guiaremision/nro-guia?prefijo=${prefijo}`);
+  }
+  registrarNuevaGuiaRemision(guiaremision:GuiaRemision){
+    return this.http.post<Result<number>>(`${this.BASE_URL}guiaremision`,guiaremision);
+  }
 }

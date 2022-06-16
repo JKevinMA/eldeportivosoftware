@@ -8,6 +8,7 @@ export class OrdenCompra{
     impuesto:number;
     idTrabajador:number;
     fechaGenerada:Date;
+    estado:string;
 
     detalles:OrdenCompraDetalle[];
 }

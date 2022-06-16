@@ -51,3 +51,8 @@ select {
 .form-group>p{
     margin-bottom: 0px;
 }
+
+.group-horizontal{
+    display: flex;
+    align-items: center;
+}

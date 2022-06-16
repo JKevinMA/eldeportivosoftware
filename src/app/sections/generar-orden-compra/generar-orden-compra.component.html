@@ -60,10 +60,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label for="fechaSolicitando" class="col-sm-4 col-form-label">Costo de envío (S/.):</label>
+                                            <label for="costoEnvio" class="col-sm-4 col-form-label">Costo de envío (S/.):</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" id="fechaSolicitando"
-                                                    placeholder="Fecha Solicitada" (change)="calcular()" [(ngModel)]="ordenCompra.costoEnvio">
+                                                <input type="number" class="form-control" id="costoEnvio"
+                                                    placeholder="Costo de envío" (change)="calcular()" [(ngModel)]="ordenCompra.costoEnvio">
                                             </div>
                                         </div>
                                     </div>
@@ -117,10 +117,10 @@
                                         <td>{{od.codigoMaterial}}</td>
                                         <td>{{od.material}}</td>
                                         <td>
-                                            <input style="text-align: end;" type="text" name="" id="" (change)="calcular()"  [(ngModel)]="od.cantidadRequerida" class="form-control">
+                                            <input style="text-align: end;" type="number" name="" id="" (change)="calcular()"  [(ngModel)]="od.cantidadRequerida" class="form-control">
                                         </td>
                                         <td>
-                                            <input style="text-align: end;" type="text" name="" id="" (change)="calcular()" [(ngModel)]="od.precioUnidad" class="form-control">
+                                            <input style="text-align: end;" type="number" name="" id="" (change)="calcular()" [(ngModel)]="od.precioUnidad" class="form-control">
                                         </td>
                                         <td style="text-align: end;">
                                             {{(od.cantidadRequerida || 0) * (od.precioUnidad || 0) | number:'2.2-2'}}
@@ -146,12 +146,16 @@
                                             <td style="text-align: end;">{{subtotal | number:'2.2-2'}}</td>
                                         </tr>
                                         <tr>
-                                            <th style="text-align: end;">Costo envío (S/.):</th>
-                                            <td style="text-align: end;">{{ordenCompra.costoEnvio | number:'2.2-2'}}</td>
-                                        </tr>
-                                        <tr>
                                             <th style="text-align: end;">IGV 18% (S/.):</th>
                                             <td style="text-align: end;">{{igv | number:'2.2-2'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: end;">(Subtotal + IGV) (S/.):</th>
+                                            <td style="text-align: end;">{{subtotal +igv | number:'2.2-2'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: end;">Costo envío (S/.):</th>
+                                            <td style="text-align: end;">{{ordenCompra.costoEnvio | number:'2.2-2'}}</td>
                                         </tr>
                                         <tr>
                                             <th style="text-align: end;">Importe Total (S/.):</th>
@@ -171,7 +175,7 @@
                 <i class="fas fa-times"></i>
                 &nbsp; Salir
             </button>
-            <button class="btn btn-success">
+            <button (click)="registrar()" class="btn btn-success">
                 <i class="fas fa-check-circle"></i>
                 &nbsp; Generar Orden de Compra
             </button>
