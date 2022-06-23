@@ -10,6 +10,7 @@ import { GenerarGuiaRemisionComponent } from './sections/generar-guia-remision/g
 import { GenerarOrdenCompraComponent } from './sections/generar-orden-compra/generar-orden-compra.component';
 import { GenerarOrdenReposicionComponent } from './sections/generar-orden-reposicion/generar-orden-reposicion.component';
 import { GenerarSolicitudCotizacionProveedorComponent } from './sections/generar-solicitud-cotizacion-proveedor/generar-solicitud-cotizacion-proveedor.component';
+import { RecepcionCompraComponent } from './sections/recepcion-compra/recepcion-compra.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path:'generar-guia-remision',component: GenerarGuiaRemisionComponent},
       {path:'generar-despacho-pedido',component: GenerarDespachoPedidoComponent},
       {path:'almacenar-materiales',component: AlmacenarMaterialesComponent},
+      {path:'recepcion-compra',component: RecepcionCompraComponent},
     ]
 
   },

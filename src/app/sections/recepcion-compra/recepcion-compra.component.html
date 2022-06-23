@@ -1,0 +1,225 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Recepción de Compra</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Ordenes de Compra
+                        </h3>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nro Orden</th>
+                                        <th>Fecha Solicitada</th>
+                                        <th>Items</th>
+                                        <th>Anular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr *ngFor="let orden of ordenes">
+                                        <td><input type="radio" name="rbgOR" (change)="obtenerDetallesOrden(orden.idOrden)"></td>
+                                        <td>{{orden.idOrden}}</td>
+                                        <td>{{orden.fechaGenerada | date:'shortDate'}}</td>
+                                        <td>{{orden.nroItems}}</td>
+                                        <td><a class="link" (click)="actualizarOrden(estadoFinalAnuladoOrden,orden.idOrden)">Anular</a></td>
+                                    </tr> -->
+                                    
+                                </tbody>
+                            </table>
+                            <label for="detalleOrden" class="ml-3">Detalles de la Orden seleccionada</label>
+                            <table id="detalleOrden" class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo Material</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>PrecionUnidad (IGV)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <!--  <tr *ngFor="let detalle of detallesOrden">
+                                        <td>{{detalle.codigoMaterial}}</td>
+                                        <td>{{detalle.material}}</td>
+                                        <td>{{detalle.cantidadRequerida}}</td>
+                                        <td>{{detalle.presentacion}}</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card  card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Detalle de Recepción
+                        </h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo Material</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>PrecionUnidad (IGV)</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <!--  <tr *ngFor="let detalle of detallesOrden">
+                                        <td>{{detalle.codigoMaterial}}</td>
+                                        <td>{{detalle.material}}</td>
+                                        <td>{{detalle.cantidadRequerida}}</td>
+                                        <td>{{detalle.presentacion}}</td>
+                                        <td>{{'Quitar'}}</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                            <div style="display:flex; align-items:center;" class="p-4">
+                                <label for="">Observacion:</label>
+                                <div class=" ml-3 " style="width: 100%;">
+                                    <textarea name=""  class="form-control" id="" cols="20" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card  card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Orden de Pago
+                        </h3>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="tab-content">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="nroOrdenPago" class="col-sm-4 col-form-label">Nro Orden Pago:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="nroOrdenPago"
+                                                    placeholder="Nro Ficha" [value]="solicitudCotizacion.idSolicitudCotizacion" readonly> -->
+                                                    <!-- <input type="text" class="form-control" id="nroOrdenPago"
+                                                    placeholder="Nro Orden Pago" readonly> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputFecha" class="col-sm-4 col-form-label">Fecha:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="inputFecha"
+                                                    placeholder="Fecha" readonly> -->
+                                                <!-- <input type="text" class="form-control" id="inputFecha"
+                                                    placeholder="Fecha" value="{{fechaActual.getFullYear()+'-'+((fechaActual.getMonth()+1) | number:'2.') +'-'+ (fechaActual.getDate() | number:'2.') }}" readonly> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="ruc" class="col-sm-4 col-form-label">RUC:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="ruc"
+                                                    placeholder="RUC" readonly> -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="medioPago" class="col-sm-4 col-form-label">Medio de Pago:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="medioPago"
+                                                    placeholder="Medio de Pago" readonly> -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="razonSocial" class="col-sm-4 col-form-label">Razón Social:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="razonSocial"
+                                                    placeholder="Razón Social" readonly> -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="direccion" class="col-sm-4 col-form-label">Dirección:</label>
+                                            <div class="col-sm-6">
+                                                <p> - </p>
+                                                <!-- <input type="text" class="form-control" id="direccion"
+                                                    placeholder="Dirección" readonly>
+                                                 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="importeTotal" class="col-sm-4 col-form-label">Importe Total:</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="importeTotal"
+                                                    placeholder="Importe Total" readonly>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 mb-4" style="display: flex; justify-content:space-between;" >
+            <button class="btn btn-danger">
+                <i class="fas fa-times"></i>
+                &nbsp; Salir
+            </button>
+            <button (click)="registrar()" class="btn btn-success">
+                <i class="fas fa-check-circle"></i>
+                &nbsp; Generar Orden de Pago
+            </button>
+        </div>
+    </div>
+</section>

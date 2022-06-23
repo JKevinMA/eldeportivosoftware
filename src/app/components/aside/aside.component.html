@@ -47,6 +47,12 @@
                                 <p>Generar orden de compra</p>
                             </a>
                         </li>
+                        <li *ngIf="user.idRol==2" class="nav-item"> <!-- Jefe de abastecimiento de almacen Id: 2 -->
+                            <a routerLink="recepcion-compra" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Recepción de compra</p>
+                            </a>
+                        </li>
                         <li *ngIf="user.idRol==1" class="nav-item"> <!-- Encargado de almacen Id: 1 -->
                             <a routerLink="almacenar-materiales" routerLinkActive="active" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
@@ -73,7 +79,7 @@
                         <li *ngIf="user.idRol==3" class="nav-item"> <!-- Personal de entrega Id: 3 -->
                             <a routerLink="generar-despacho-pedido" routerLinkActive="active" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Generar despacho de pedido - En desarrollo</p>
+                                <p>Generar despacho de pedido</p>
                             </a>
                         </li>
                         

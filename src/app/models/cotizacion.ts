@@ -12,4 +12,5 @@ export class CotizacionDetalle {
     descripcion:     null;
     cantidad:        number;
     precioFinal:     number;
+
 }

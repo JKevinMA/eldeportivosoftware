@@ -11,6 +11,7 @@ import { GenerarGuiaRemisionComponent } from './generar-guia-remision/generar-gu
 import { ComponentsModule } from '../components/components.module';
 import { GenerarDespachoPedidoComponent } from './generar-despacho-pedido/generar-despacho-pedido.component';
 import { AlmacenarMaterialesComponent } from './almacenar-materiales/almacenar-materiales.component';
+import { RecepcionCompraComponent } from './recepcion-compra/recepcion-compra.component';
 
 
 
@@ -23,7 +24,8 @@ import { AlmacenarMaterialesComponent } from './almacenar-materiales/almacenar-m
     GenerarEntregaMaterialFabricacionComponent,
     GenerarGuiaRemisionComponent,
     GenerarDespachoPedidoComponent,
-    AlmacenarMaterialesComponent
+    AlmacenarMaterialesComponent,
+    RecepcionCompraComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { AlmacenarMaterialesComponent } from './almacenar-materiales/almacenar-m
     SolicitudMaterialesSuministroComponent,
     GenerarEntregaMaterialFabricacionComponent,
     GenerarGuiaRemisionComponent,
-    GenerarDespachoPedidoComponent
+    GenerarDespachoPedidoComponent,
+    RecepcionCompraComponent
   ]
 })
 export class SectionsModule { }

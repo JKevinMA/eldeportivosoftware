@@ -14,6 +14,8 @@ import { OrdenPedido } from './models/orden-pedido';
 import { Transportista } from './models/transportista';
 import { Distrito } from './models/distrito';
 import { GuiaRemision } from './models/guia-remision';
+import { Despacho } from './models/despacho';
+import { OrdenPago } from './models/orden-pago';
 
 @Injectable({
   providedIn: 'root'
@@ -142,5 +144,24 @@ export class ApiService {
   }
   registrarNuevaGuiaRemision(guiaremision:GuiaRemision){
     return this.http.post<Result<number>>(`${this.BASE_URL}guiaremision`,guiaremision);
+  }
+
+  // GENERAR DESPACHO
+  obtenerGuiasRemision(fecha:string,estado:string){
+    return this.http.get<Result<GuiaRemision[]>>(`${this.BASE_URL}despacho/guias-remision?fecha=${fecha}&estado=${estado}`);
+  }
+  obtenerNuevoNroDespacho(prefijo:string){
+    return this.http.get<Result<Despacho>>(`${this.BASE_URL}despacho/nro-despacho?prefijo=${prefijo}`);
+  }
+  registrarNuevoDespacho(despacho:Despacho){
+    return this.http.post<Result<number>>(`${this.BASE_URL}despacho`,despacho);
+  }
+
+  // RECEPCION DE COMPRA Y GENERAR ORDEN DE PAGO
+  obtenerOrdenesCompra(){
+    return this.http.get<Result<OrdenCompra[]>>(`${this.BASE_URL}recepcioncompra/ordenes-compra`);
+  }
+  obtenerNuevoNroOrdenPago(prefijo:string){
+    return this.http.get<Result<OrdenPago>>(`${this.BASE_URL}recepcioncompra/nro-orden-pago?prefijo=${prefijo}`);
   }
 }
