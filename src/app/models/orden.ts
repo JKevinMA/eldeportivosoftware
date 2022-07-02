@@ -15,6 +15,7 @@ export class OrdenDetalle{
     material?:string;
     presentacion?:string;
     cantidadRequerida?:number;
+    cantidadSalida?:number;
     precioUnidad:number=0;
     removido?:boolean=false;
 }

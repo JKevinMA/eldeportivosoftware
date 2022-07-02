@@ -8,6 +8,7 @@ import { AlmacenarMaterialesComponent } from './sections/almacenar-materiales/al
 import { GenerarDespachoPedidoComponent } from './sections/generar-despacho-pedido/generar-despacho-pedido.component';
 import { GenerarGuiaRemisionComponent } from './sections/generar-guia-remision/generar-guia-remision.component';
 import { GenerarOrdenCompraComponent } from './sections/generar-orden-compra/generar-orden-compra.component';
+import { GenerarOrdenConfeccionComponent } from './sections/generar-orden-confeccion/generar-orden-confeccion.component';
 import { GenerarOrdenReposicionComponent } from './sections/generar-orden-reposicion/generar-orden-reposicion.component';
 import { GenerarSolicitudCotizacionProveedorComponent } from './sections/generar-solicitud-cotizacion-proveedor/generar-solicitud-cotizacion-proveedor.component';
 import { RecepcionCompraComponent } from './sections/recepcion-compra/recepcion-compra.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
       {path:'generar-despacho-pedido',component: GenerarDespachoPedidoComponent},
       {path:'almacenar-materiales',component: AlmacenarMaterialesComponent},
       {path:'recepcion-compra',component: RecepcionCompraComponent},
+      {path:'generar-orden-confeccion',component: GenerarOrdenConfeccionComponent},
     ]
 
   },

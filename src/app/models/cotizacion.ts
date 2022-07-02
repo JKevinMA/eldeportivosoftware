@@ -3,14 +3,14 @@ export class CotizacionDetalle {
     idCotizacion:    string;
     idPrenda:        number;
     prenda:          string;
-    codigoMaterial:  null;
-    material:        null;
+    codigoMaterial:  string;
+    material:        string;
     idTalla:         number;
     talla:           string;
     idDetalleDiseno: number;
-    detalleDiseno:   null;
-    descripcion:     null;
+    detalleDiseno:   string;
+    descripcion:     string;
     cantidad:        number;
     precioFinal:     number;
-
+    cantidadFabricar:number = 0;
 }

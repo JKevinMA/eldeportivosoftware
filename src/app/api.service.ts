@@ -16,6 +16,8 @@ import { Distrito } from './models/distrito';
 import { GuiaRemision } from './models/guia-remision';
 import { Despacho } from './models/despacho';
 import { OrdenPago } from './models/orden-pago';
+import { OrdenConfeccion } from './models/orden-confeccion';
+import { FichaES } from './models/ficha-E-S';
 
 @Injectable({
   providedIn: 'root'
@@ -164,4 +166,16 @@ export class ApiService {
   obtenerNuevoNroOrdenPago(prefijo:string){
     return this.http.get<Result<OrdenPago>>(`${this.BASE_URL}recepcioncompra/nro-orden-pago?prefijo=${prefijo}`);
   }
+
+  // GENERAR ORDEN DE CONFECCION
+  obtenerNuevoNroOrdenConfeccion(prefijo:string){
+    return this.http.get<Result<OrdenConfeccion>>(`${this.BASE_URL}ordenconfeccion/nro-orden-confeccion?prefijo=${prefijo}`);
+  }
+  obtenerFichasES(fecha:string,estado:string){
+    return this.http.get<Result<FichaES[]>>(`${this.BASE_URL}ordenconfeccion/fichases?fecha=${fecha}&estado=${estado}`);
+  }
+  registrarNuevaOrdenConfeccion(ordenConfeccion:OrdenConfeccion){
+    return this.http.post<Result<number>>(`${this.BASE_URL}ordenconfeccion`,ordenConfeccion);
+  }
+
 }

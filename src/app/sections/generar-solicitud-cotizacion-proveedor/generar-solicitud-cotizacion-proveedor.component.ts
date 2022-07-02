@@ -8,6 +8,10 @@ import { SolicitudCotizacion } from 'src/app/models/solicitud-cotizacion';
 import { Trabajador } from 'src/app/models/trabajador';
 import { SweetAlert } from 'src/app/utils/sweet-alert';
 import Swal from 'sweetalert2';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-generar-solicitud-cotizacion-proveedor',
@@ -179,20 +183,18 @@ export class GenerarSolicitudCotizacionProveedorComponent implements OnInit {
         this.solicitudCotizacion.proveedores = [];
         
         this.proveedoresSeleccionados.forEach(mr=>{
-          this.solicitudCotizacion.proveedores.push({ruc:mr.ruc,idSolicitudCotizacion:this.solicitudCotizacion.idSolicitudCotizacion});
+          this.solicitudCotizacion.proveedores.push({razonSocial:mr.razonSocial,ruc:mr.ruc,idSolicitudCotizacion:this.solicitudCotizacion.idSolicitudCotizacion});
         });
-
-        console.log(JSON.stringify(this.solicitudCotizacion));
         
         this.api.registrarNuevaSolicitudCotizacion(this.solicitudCotizacion).subscribe(r => {
           if (r.success) {
             if(r.response! > 0){
-
               //actualizando estado a la orden seleccionada
               this.api.actualizarEstadoOrden(this.estadoFinalAceptadoOrden,this.idOrdenSeleccionado).subscribe(r=>{
                 SweetAlert.alertaRegistroCorrecto();
               });
-
+              
+              this.generarPDFs();
             }
           } else {
             SweetAlert.alertaRegistroError(r.message);
@@ -211,4 +213,79 @@ export class GenerarSolicitudCotizacionProveedorComponent implements OnInit {
       }
     });
   }
+
+  generarPDFs(){
+    this.solicitudCotizacion.proveedores.forEach(p=>{
+      this.generarPDF(p.razonSocial,new Date().toISOString().substring(0,10),this.modalidadPago,new Date(this.model.year,this.model.month -1, this.model.day).toISOString().substring(0,10));
+    });
+  }
+
+  generarPDF(proveedor:string,fecha:string,formaPago:string,fechaMaxima:string){
+    var pdfDefinition = {
+      content: [
+        {
+          text: 'SOLICITUD DE COTIZACIÓN',
+          style: 'titulo_uno',
+          margin: [ 0, 0, 0, 20 ]
+        },
+        {
+          text: proveedor,
+          style: 'proveedor',
+          margin: [ 0, 50, 0, 20 ]
+        },
+        {
+           text:[{text:'Datos del solicitante:',bold:true},{text:'  Empresa de Confecciones El Deportivo'}]
+        },
+        {
+            margin: [ 0, 10, 0, 20 ],
+          text: fecha,
+          style: 'fecha'
+        },
+        {
+          table: {
+                headerRows: 1,
+                widths: [ 100, '*','auto', 100],
+        
+                body: [
+                  [ 'Codigo', 'Producto','Unidad de Medida', 'Cantidad'],
+                  /* [ { text: 'M001', bold: true }, 'Tela Poliester rojo','rollos', '70'],
+                  [ { text: 'M002', bold: true }, 'Tela Poliester blanco','rollos', '80'], */
+                ]
+              },
+              margin:[0,0,0,20]
+        },
+        {
+           text:[{text:'Forma de pago:',bold:true},{text:'  '+formaPago}],
+           margin:[0,0,0,10]
+        },
+        {
+           text:[{text:'Fecha máxima para la entrega:',bold:true},{text:'  '+fechaMaxima}]
+        },
+      
+      ],
+      styles: {
+          titulo_uno:{
+              alignment:'center',
+              fontSize: 18,
+          bold: true
+          },
+          proveedor:{
+              alignment:'left',
+              fontSize: 14,
+          bold: true
+          },
+        fecha: {
+            alignment:'right',
+          fontSize: 12,
+          bold: true
+        }
+      }
+      
+    }
+
+    var pdf = pdfMake.createPdf(pdfDefinition);
+    pdf.download();
+  }
+
+  
 }

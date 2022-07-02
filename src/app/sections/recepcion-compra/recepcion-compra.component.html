@@ -25,19 +25,21 @@
                                     <tr>
                                         <th></th>
                                         <th>Nro Orden</th>
-                                        <th>Fecha Solicitada</th>
-                                        <th>Items</th>
-                                        <th>Anular</th>
+                                        <th>Fecha</th>
+                                        <th>Proveedor</th>
+                                        <th>Importe Total</th>
+                                        <th>Costo Envio</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <tr *ngFor="let orden of ordenes">
-                                        <td><input type="radio" name="rbgOR" (change)="obtenerDetallesOrden(orden.idOrden)"></td>
-                                        <td>{{orden.idOrden}}</td>
-                                        <td>{{orden.fechaGenerada | date:'shortDate'}}</td>
-                                        <td>{{orden.nroItems}}</td>
-                                        <td><a class="link" (click)="actualizarOrden(estadoFinalAnuladoOrden,orden.idOrden)">Anular</a></td>
-                                    </tr> -->
+                                    <tr *ngFor="let orden of ordenesCompra">
+                                        <td><input type="radio" name="rbgOC" (change)="ordenCompraSeleccionada = orden"></td>
+                                        <td>{{orden.idOrdenCompra}}</td>
+                                        <td>{{orden.fechaGenerada | date:'yyyy-MM-dd'}}</td>
+                                        <td>{{orden.razonSocial }}</td>
+                                        <td style="text-align: end;">{{orden.importeTotal | currency:'S/. '}}</td>
+                                        <td style="text-align: end;">{{orden.costoEnvio | currency:'S/. '}}</td>
+                                    </tr>
                                     
                                 </tbody>
                             </table>
@@ -48,16 +50,16 @@
                                         <th>Codigo Material</th>
                                         <th>Descripción</th>
                                         <th>Cantidad</th>
-                                        <th>PrecionUnidad (IGV)</th>
+                                        <th>Precio Unidad (IGV)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <!--  <tr *ngFor="let detalle of detallesOrden">
+                                    <tr *ngFor="let detalle of ordenCompraSeleccionada.detalles">
                                         <td>{{detalle.codigoMaterial}}</td>
                                         <td>{{detalle.material}}</td>
-                                        <td>{{detalle.cantidadRequerida}}</td>
-                                        <td>{{detalle.presentacion}}</td>
-                                    </tr> -->
+                                        <td style="text-align: end;" >{{detalle.cantidad }}</td>
+                                        <td style="text-align: end;" >{{detalle.precioUnitario | currency:'S/. '}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -82,18 +84,25 @@
                                         <th>Codigo Material</th>
                                         <th>Descripción</th>
                                         <th>Cantidad</th>
-                                        <th>PrecionUnidad (IGV)</th>
+                                        <th>Precio Unidad c/Igv (S/.)</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <!--  <tr *ngFor="let detalle of detallesOrden">
+                                    <tr *ngFor="let detalle of ordenCompraSeleccionada.detalles" [class.table-danger]="detalle.removido">
                                         <td>{{detalle.codigoMaterial}}</td>
                                         <td>{{detalle.material}}</td>
-                                        <td>{{detalle.cantidadRequerida}}</td>
-                                        <td>{{detalle.presentacion}}</td>
-                                        <td>{{'Quitar'}}</td>
-                                    </tr> -->
+                                        <td>
+                                            <input style="text-align: end;" class="form-control" type="number" name="cantidad" [(ngModel)]="detalle.cantidad" id=""  >
+                                        </td>
+                                        <td>
+                                            <input style="text-align: end;" class="form-control" type="number" name="precioUnitario" [(ngModel)]="detalle.precioUnitario" id=""  >
+                                        </td>
+                                        <td>
+                                            <a class="link" *ngIf="detalle.removido"  (click)="detalle.removido=!detalle.removido">Agregar</a>
+                                            <a class="link" *ngIf="!detalle.removido" (click)="detalle.removido=!detalle.removido" >Quitar</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <div style="display:flex; align-items:center;" class="p-4">
@@ -124,7 +133,7 @@
                                         <div class="form-group row">
                                             <label for="nroOrdenPago" class="col-sm-4 col-form-label">Nro Orden Pago:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{ordenPago.idOrdenPago}}</p>
                                                 <!-- <input type="text" class="form-control" id="nroOrdenPago"
                                                     placeholder="Nro Ficha" [value]="solicitudCotizacion.idSolicitudCotizacion" readonly> -->
                                                     <!-- <input type="text" class="form-control" id="nroOrdenPago"
@@ -136,7 +145,7 @@
                                         <div class="form-group row">
                                             <label for="inputFecha" class="col-sm-4 col-form-label">Fecha:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{fecha}}</p>
                                                 <!-- <input type="text" class="form-control" id="inputFecha"
                                                     placeholder="Fecha" readonly> -->
                                                 <!-- <input type="text" class="form-control" id="inputFecha"
@@ -150,7 +159,7 @@
                                         <div class="form-group row">
                                             <label for="ruc" class="col-sm-4 col-form-label">RUC:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{ordenCompraSeleccionada.ruc || '-'}}</p>
                                                 <!-- <input type="text" class="form-control" id="ruc"
                                                     placeholder="RUC" readonly> -->
                                                 
@@ -161,7 +170,7 @@
                                         <div class="form-group row">
                                             <label for="medioPago" class="col-sm-4 col-form-label">Medio de Pago:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{ordenCompraSeleccionada.modalidadPago || '-'}}</p>
                                                 <!-- <input type="text" class="form-control" id="medioPago"
                                                     placeholder="Medio de Pago" readonly> -->
                                                 
@@ -174,7 +183,7 @@
                                         <div class="form-group row">
                                             <label for="razonSocial" class="col-sm-4 col-form-label">Razón Social:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{ordenCompraSeleccionada.razonSocial || '-'}}</p>
                                                 <!-- <input type="text" class="form-control" id="razonSocial"
                                                     placeholder="Razón Social" readonly> -->
                                                 
@@ -185,7 +194,7 @@
                                         <div class="form-group row">
                                             <label for="direccion" class="col-sm-4 col-form-label">Dirección:</label>
                                             <div class="col-sm-6">
-                                                <p> - </p>
+                                                <p>{{ordenCompraSeleccionada.direccion || '-'}}</p>
                                                 <!-- <input type="text" class="form-control" id="direccion"
                                                     placeholder="Dirección" readonly>
                                                  -->
@@ -199,7 +208,7 @@
                                             <label for="importeTotal" class="col-sm-4 col-form-label">Importe Total:</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" id="importeTotal"
-                                                    placeholder="Importe Total" readonly>
+                                                    placeholder="Importe Total" [value]="ordenCompraSeleccionada.importeTotal || 00.00">
                                                 
                                             </div>
                                         </div>
@@ -215,8 +224,8 @@
             <button class="btn btn-danger">
                 <i class="fas fa-times"></i>
                 &nbsp; Salir
-            </button>
-            <button (click)="registrar()" class="btn btn-success">
+            </button> 
+            <button (click)="registrar()" [disabled]="!ordenCompraSeleccionada.idOrdenCompra" class="btn btn-success">
                 <i class="fas fa-check-circle"></i>
                 &nbsp; Generar Orden de Pago
             </button>

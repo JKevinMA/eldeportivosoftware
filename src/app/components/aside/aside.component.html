@@ -20,6 +20,23 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-item"  *ngIf="user.idRol==5">
+                    <a class="nav-link ">
+                        <i class="nav-icon fas fa-bell"></i>
+                        <p>
+                            Atención de pedidos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li *ngIf="user.idRol==5" class="nav-item"> <!-- Operario Textil Id: 5 -->
+                            <a routerLink="generar-orden-confeccion" routerLinkActive="active" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generar Orden de Confección de Pedido</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item" *ngIf="user.idRol==1 || user.idRol==2">
                     <a class="nav-link ">
                         <i class="nav-icon fas fa-box"></i>

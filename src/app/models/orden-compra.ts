@@ -12,12 +12,12 @@ export class OrdenCompra{
 
     detalles:OrdenCompraDetalle[];
 
-    importeTotal: number;
-    modalidadPago: string;
-    telefono: string;
-    direccion: string;
-    razonSocial: string;
-    observacion: string;
+    importeTotal?: number;
+    modalidadPago?: string;
+    telefono?: string;
+    direccion?: string;
+    razonSocial?: string;
+    observacion?: string;
 }
 
 export class OrdenCompraDetalle{
@@ -25,5 +25,6 @@ export class OrdenCompraDetalle{
     codigoMaterial:string;
     cantidad:number;
     precioUnitario:number;
-    material:string;
+    material?:string;
+    removido?:boolean=false;
 }

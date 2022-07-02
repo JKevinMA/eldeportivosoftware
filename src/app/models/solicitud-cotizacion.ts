@@ -11,4 +11,5 @@ export class SolicitudCotizacion{
 export class ProveedorCotizacion{
     idSolicitudCotizacion:string;
     ruc:string;
+    razonSocial:string;
 }
